@@ -6,7 +6,7 @@ boot = ->
   return if not hash or not hash.placement
   return if not extraParam =  conf[hash.placement]
   url = "#{target}&#{extraParam}"
-  anchor = document.getElementsByClassName('link02')[0]
+  anchor = document.getElementById('yihaodian')
   anchor.href = url
 
 decodeSmtb = (s)->

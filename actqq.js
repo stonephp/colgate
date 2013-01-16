@@ -17,7 +17,7 @@
       return;
     }
     url = "" + target + "&" + extraParam;
-    anchor = document.getElementsByClassName('link02')[0];
+    anchor = document.getElementById('yihaodian');
     return anchor.href = url;
   };
 
