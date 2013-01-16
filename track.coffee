@@ -1,7 +1,7 @@
 boot = ->
   target = "http://www.yihaodian.com/cmsPage/show.do?pageId=25588&"
   return if not smt_b = getSmt_b()
-  conf = conf()
+  conf = getConf()
   hash = decodeSmtb smt_b
   return if not hash or not hash.placement
   return if not extraParam =  conf[hash.placement]
@@ -37,7 +37,7 @@ getSmt_b = (url = location.href)->
 
   query.smt_b
 
-conf = ->
+getConf = ->
   200141609: "tracker_u=10162933185"
   200141613: "tracker_u=10162933185"
   200141614: "tracker_u=10162933185"
