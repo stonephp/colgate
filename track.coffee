@@ -35,9 +35,10 @@ getSmt_b = (url = location.href)->
   [url, hash] = url.split '#'
   [path, search] = url.split '?'
   params = search.split '&' if search
-  for x in params
-    [key, value] = x.split '='
-    query[key] = decodeURIComponent value
+  if params
+    for x in params
+      [key, value] = x.split '='
+      query[key] = decodeURIComponent value
 
   query.smt_b
 

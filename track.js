@@ -63,10 +63,12 @@
     if (search) {
       params = search.split('&');
     }
-    for (_i = 0, _len = params.length; _i < _len; _i++) {
-      x = params[_i];
-      _ref2 = x.split('='), key = _ref2[0], value = _ref2[1];
-      query[key] = decodeURIComponent(value);
+    if (params) {
+      for (_i = 0, _len = params.length; _i < _len; _i++) {
+        x = params[_i];
+        _ref2 = x.split('='), key = _ref2[0], value = _ref2[1];
+        query[key] = decodeURIComponent(value);
+      }
     }
     return query.smt_b;
   };
