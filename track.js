@@ -22,24 +22,24 @@
   };
 
   decodeSmtb = function(s) {
-    var ret;
+    var a, i, num, ret, x, _i, _j, _ref;
     ret = [];
     if (s.length === 23) {
       s = "0" + s;
     }
-    s = _.sortBy(s.split(''), function(x, i) {
-      return -i;
-    });
-    _.times(12, function(i) {
-      var num;
+    a = [];
+    for (x = _i = 0, _ref = s.length; 0 <= _ref ? _i <= _ref : _i >= _ref; x = 0 <= _ref ? ++_i : --_i) {
+      a[s.length - x] = s[x];
+    }
+    for (i = _j = 1; _j < 12; i = ++_j) {
       i *= 2;
-      num = parseInt("" + s[i + 1] + s[i], 16);
+      num = parseInt("" + a[i + 1] + a[i], 16);
       if (num < (i / 2) + 1) {
         num += 256;
       }
       num -= (i / 2) + 1;
-      return ret.push(num);
-    });
+      ret.push(num);
+    }
     return {
       placement: (ret[0] << 24) + (ret[1] << 16) + (ret[2] << 8) + ret[3],
       creative: (ret[4] << 24) + (ret[5] << 16) + (ret[6] << 8) + ret[7],

@@ -14,10 +14,13 @@ decodeSmtb = (s)->
   #23位时补一位前导零
   s = "0#{s}" if s.length is 23
   #翻转字符串
-  s = _.sortBy(s.split(''), (x, i)-> - i)
-  _.times 12, (i)->
+  a = []
+  for x in [0..s.length]
+    a[s.length - x] = s[x]
+
+  for i in [1...12]
     i *= 2
-    num = parseInt "#{s[i + 1]}#{s[i]}", 16
+    num = parseInt "#{a[i + 1]}#{a[i]}", 16
     num += 256 if num < (i / 2) + 1
     num -= (i / 2) + 1
     ret.push num
