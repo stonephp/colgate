@@ -22,18 +22,23 @@
   };
 
   decodeSmtb = function(s) {
-    var a, i, num, ret, x, _i, _j, _ref;
+    var i, num, ret, t, tmp, _i, _j, _ref, _ref1;
+    tmp = [];
     ret = [];
     if (s.length === 23) {
       s = "0" + s;
     }
-    a = [];
-    for (x = _i = 0, _ref = s.length; 0 <= _ref ? _i <= _ref : _i >= _ref; x = 0 <= _ref ? ++_i : --_i) {
-      a[s.length - x] = s[x];
+    for (i = _i = _ref = s.length - 1; _ref <= 0 ? _i <= 0 : _i >= 0; i = _ref <= 0 ? ++_i : --_i) {
+      tmp.push(s[i]);
     }
-    for (i = _j = 1; _j < 12; i = ++_j) {
-      i *= 2;
-      num = parseInt("" + a[i + 1] + a[i], 16);
+    s = tmp.join('');
+    for (i = _j = 0, _ref1 = s.length / 2; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; i = 0 <= _ref1 ? ++_j : --_j) {
+      i = i * 2;
+      tmp = [];
+      tmp.push(s[i + 1]);
+      tmp.push(s[i]);
+      t = tmp.join("");
+      num = parseInt(t, 16);
       if (num < (i / 2) + 1) {
         num += 256;
       }

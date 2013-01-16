@@ -10,24 +10,25 @@ boot = ->
   anchor.href = url
 
 decodeSmtb = (s)->
+  tmp = []
   ret = []
-  #23位时补一位前导零
   s = "0#{s}" if s.length is 23
-  #翻转字符串
-  a = []
-  for x in [0..s.length]
-    a[s.length - x] = s[x]
-
-  for i in [1...12]
-    i *= 2
-    num = parseInt "#{a[i + 1]}#{a[i]}", 16
+  for i in [s.length - 1..0]
+    tmp.push(s[i])
+  s = tmp.join('')
+  for i in [0..s.length / 2]
+    i = i * 2
+    tmp = []
+    tmp.push(s[i + 1])
+    tmp.push(s[i])
+    t = tmp.join("")
+    num = parseInt(t, 16)
     num += 256 if num < (i / 2) + 1
     num -= (i / 2) + 1
-    ret.push num
-
+    ret.push(num)
   placement: (ret[0] << 24) + (ret[1] << 16) + (ret[2] << 8) + ret[3]
   creative: (ret[4] << 24) + (ret[5] << 16) + (ret[6] << 8) + ret[7]
-  keyword: (ret[8] << 24) + (ret[9] << 16) + (ret[10] << 8) + ret[11]
+  keyword:  (ret[8] << 24) + (ret[9] << 16) + (ret[10] << 8) + ret[11]
 
 getSmt_b = (url = location.href)->
   query = {}
