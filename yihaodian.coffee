@@ -1,3 +1,16 @@
+getElementsByClassName = (classname)->
+  d = document
+  e = d.getElementsByTagName('a')
+  c = new RegExp('\\b'+classname+'\\b')
+  r = []
+
+  for x in e
+    cn = x.className
+    r.push(x) if c.test(cn)
+  r
+
+document.getElementsByClassName = getElementsByClassName if typeof document.getElementsByClassName != 'function'
+
 boot = ->
   target = "http://www.yihaodian.com/cmsPage/show.do?pageId=25588&"
   return if not smt_b = getSmt_b()
@@ -15,13 +28,13 @@ decodeSmtb = (s)->
   ret = []
   s = "0#{s}" if s.length is 23
   for i in [s.length - 1..0]
-    tmp.push(s[i])
+    tmp.push(s.charAt(i))
   s = tmp.join('')
   for i in [0..s.length / 2]
     i = i * 2
     tmp = []
-    tmp.push(s[i + 1])
-    tmp.push(s[i])
+    tmp.push(s.charAt(i + 1))
+    tmp.push(s.charAt(i))
     t = tmp.join("")
     num = parseInt(t, 16)
     num += 256 if num < (i / 2) + 1
